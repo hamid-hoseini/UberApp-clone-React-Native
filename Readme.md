@@ -1,7 +1,7 @@
 # Uber 2.0 clone with REACT NATIVE
   A copy of the Uber app to learn and improve coding skills with the React Native platform.
 
-## What I learned here how to use:
+## What I have learned is how to use:
 
 1. Tailwind CSS with RN for styling
 2. React Redux for managing and centralizing application state

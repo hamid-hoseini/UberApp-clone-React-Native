@@ -3,31 +3,38 @@ import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from "react-native-elements";
 import tw from 'tailwind-react-native-classnames';
+import { useSelector } from 'react-redux';
+import { selectTravelTimeInformation } from '../slices/navSlice';
+
+const data = [
+  {
+    id: 'Uber-X-123',
+    title: "Uber X",
+    multiplier: 1,
+    image: "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_485,h_385/f_auto,q_auto/products/carousel/UberX.png"
+  },
+  {
+    id: 'Uber-XL-456',
+    title: "Uber XL",
+    multiplier: 1.2,
+    image: "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_485,h_385/f_auto,q_auto/products/carousel/UberXL.png"
+  },
+  {
+    id: 'Uber-LUX-789',
+    title: "Uber LUX",
+    multiplier: 1.75,
+    image: "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_485,h_385/f_auto,q_auto/products/carousel/Lux.png"
+  }
+];
+
+// if we have surge pricing, this goes up
+const SURGE_CHANGE_RATE = 1.5;
 
 const RideOptionsCard = () => {
 
   const navigation = useNavigation();
-  const [selected, setSelected] = useState()
-  const data = [
-    {
-      id: 'Uber-X-123',
-      title: "Uber X",
-      multiplier: 1,
-      image: "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_485,h_385/f_auto,q_auto/products/carousel/UberX.png"
-    },
-    {
-      id: 'Uber-XL-456',
-      title: "Uber XL",
-      multiplier: 1.2,
-      image: "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_485,h_385/f_auto,q_auto/products/carousel/UberXL.png"
-    },
-    {
-      id: 'Uber-LUX-789',
-      title: "Uber LUX",
-      multiplier: 1.75,
-      image: "https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_485,h_385/f_auto,q_auto/products/carousel/Lux.png"
-    }
-  ];
+  const [selected, setSelected] = useState();
+  const travelTimeInformation = useSelector(selectTravelTimeInformation);
 
   return (
     <SafeAreaView style={tw`bg-white flex-grow`}>
@@ -38,7 +45,9 @@ const RideOptionsCard = () => {
         >
           <Icon name="chevron-left" type="fontawesome" />
         </TouchableOpacity>
-        <Text style={tw`text-center py-2 text-xl`}>Select a Ride</Text>
+        <Text style={tw`text-center py-2 text-xl`}>
+          Select a Ride - {travelTimeInformation?.distance.text}
+        </Text>
       </View>
       <FlatList 
         data={data}
@@ -54,7 +63,7 @@ const RideOptionsCard = () => {
             />
             <View style={tw`-ml-6`}>
               <Text style={tw`text-xl font-semibold`}>{title}</Text>
-              <Text>Travel Time...</Text>
+              <Text>{travelTimeInformation?.duration.text} Travel Time</Text>
             </View>
             <Text style={tw`text-xl`}>$99</Text>
           </TouchableOpacity>
