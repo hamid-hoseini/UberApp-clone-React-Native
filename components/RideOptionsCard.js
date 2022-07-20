@@ -46,7 +46,7 @@ const RideOptionsCard = () => {
           <Icon name="chevron-left" type="fontawesome" />
         </TouchableOpacity>
         <Text style={tw`text-center py-2 text-xl`}>
-          Select a Ride - {travelTimeInformation?.distance.text}
+          Select a Ride - {travelTimeInformation?.distance?.text}
         </Text>
       </View>
       <FlatList 
@@ -63,13 +63,18 @@ const RideOptionsCard = () => {
             />
             <View style={tw`-ml-6`}>
               <Text style={tw`text-xl font-semibold`}>{title}</Text>
-              <Text>{travelTimeInformation?.duration.text} Travel Time</Text>
+              <Text>{travelTimeInformation?.duration?.text} Travel Time</Text>
             </View>
-            <Text style={tw`text-xl`}>$99</Text>
+            <Text style={tw`text-sm`}>
+              {new Intl.NumberFormat("en-gb", {
+                style: "currency",
+                currency: "USD"
+              }).format((travelTimeInformation?.duration?.value * SURGE_CHANGE_RATE * multiplier) / 100)}
+            </Text>
           </TouchableOpacity>
         )}
       />
-      <View style={tw`-mt-5`}>
+      <View>
         <TouchableOpacity
           disabled={!selected}
           style={tw`bg-black py-2 m-1 ${!selected && "bg-gray-300"}`}
@@ -78,8 +83,8 @@ const RideOptionsCard = () => {
         </TouchableOpacity>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 export default RideOptionsCard
 

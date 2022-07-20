@@ -29,6 +29,29 @@
   - React Native Maps Directions
 
 
+> The Distance Matrix API to get travel distance and time for a matrix of origins and destinations
+
+```jsx
+    const getTravelTime = async () => {
+      fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?
+      units=imperial&origins=${origin.description}
+      &destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`)
+        .then((res) => res.json())
+        .then(data => {
+          dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
+        })
+    };
+```
+
+> In order to convert the price using ES6 
+
+```jsx
+  {new Intl.NumberFormat("en-gb", {
+          style: "currency",
+          currency: "USD"
+        }).format((travelTimeInformation?.duration?.value * SURGE_CHANGE_RATE * multiplier) / 100)
+  }
+```
 
 ### Supported platform
 
