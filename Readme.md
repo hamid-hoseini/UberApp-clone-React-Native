@@ -21,12 +21,19 @@
   - React Native Vector Icons
   - React Native Safe Area Context
   - React Navigation Native
-  - expo install react-native-screens react-native-safe-area-context
-  - @react-navigation/native-stack
+  - React Native Screens
+  - Native Stack Navigator (@react-navigation/native-stack)
   - react-native-google-places-autocomplete
   - React Native Dotenv
   - React Native Maps
   - React Native Maps Directions
+
+Note: let's use expo to install react-native-screens react-native-safe-area-context
+
+## App overview
+
+![Uber-clone](https://user-images.githubusercontent.com/7660220/180056742-173a5577-1a66-4356-9a88-9e7c9e14b5bc.png)
+
 
 
 > The Distance Matrix API to get travel distance and time for a matrix of origins and destinations
@@ -55,5 +62,6 @@
 
 ### Supported platform
 
-- Android
 - Ios
+- Android
+

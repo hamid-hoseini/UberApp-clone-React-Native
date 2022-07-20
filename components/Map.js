@@ -12,8 +12,7 @@ const Map = () => {
   const origin = useSelector(selectOrigin);
   const destination = useSelector(selectDestination);
   const mapRef = useRef(null);
-  console.log(origin);
-  console.log(destination);
+
   let loading = false;
 
   const dispatch = useDispatch();
@@ -37,7 +36,6 @@ const Map = () => {
       &destinations=${destination.description}&key=${GOOGLE_MAPS_APIKEY}`)
         .then((res) => res.json())
         .then(data => {
-          console.log(data);
           dispatch(setTravelTimeInformation(data.rows[0].elements[0]));
         })
     };
@@ -59,8 +57,8 @@ const Map = () => {
     >
       {loading && origin && destination && (
         <MapViewDirections 
-          origin={origin.location}
-          destination={destination.location}
+          origin={origin.description}
+          destination={destination.description}
           apikey={GOOGLE_MAPS_APIKEY}
           strokeWidth={3}
           strokeColor="black"
